@@ -66,7 +66,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="#">
+          <a class="nav-link text-white " href="/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -82,173 +82,42 @@
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-      navbar-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Add Tenant</li>
-          </ol>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group input-group-outline"></div>
-          </div>
-          <ul class="navbar-nav  justify-content-end">
-
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-xl-12 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div
-                class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="text-end pt-1">
-                <a class="btn bg-gradient-dark mb-0" href="javascript:;" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add Students</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-      <div class="row mt-4 mb-4">
-        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
-          <div class="card">
-            <div class="card-header pb-0">
-              <div class="row">
-                <div class="col-lg-6 col-7">
-                  <h6>Total Students</h6>
-                </div>
-
-              </div>
-            </div>
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mobile
-                        No.</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        College</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Degree
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fees
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Duration</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Profile</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for student in students%}
-                    <tr>
-                      <td class="align-middle text-sm">{{student.name}}</td>
-                      <td class="align-middle text-sm">{{student.email}}</td>
-                      <td class="align-middle text-center text-sm">{{student.phone}}</td>
-                      <td class="text-center text-sm">{{student.college}}</td>
-                      <td class="text-center text-sm">{{student.degree}}</td>
-                      <td class="text-center text-sm">{{student.course.course_name}}</td>
-                      <td class="text-center text-sm">{{student.course.fees}}</td>
-                      <td class="text-center text-sm">{{student.course.duration}}</td>
-                      <td class="text-center text-sm">
-                        <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <a
-                              href="/viewProfile/{{student.id}}"
-                              type="button"
-                              class="btn btn-outline-primary btn-sm mb-0"
-                              >View</a
-                            >
-                          </div>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             <div class="modal-body">
               <div class="card-body">
-                <form role="form" action='/createstudent/' method= 'POST' enctype="multipart/form-data">
+                <form role="form" action='/updateStudentDetail/' method= 'POST' enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="row">
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name = "name" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <input type="text" class="form-control" value = "{{student.name}}" name = "name">
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control"   name = "email"onfocus="focused(this)" onfocusout="defocused(this)">
+                        <input type="email" class="form-control" value = "{{student.email}}"name = "email"onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Mobile No.</label>
-                        <input type="text" class="form-control"   name = "phone" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <input type="text" class="form-control" value = "{{student.phone}}" name = "phone" onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">College</label>
-                        <input type="text" class="form-control"   name = "college" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <input type="text" class="form-control" value = "{{student.college}}"  name = "college" onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
                         <label class="form-label">Degree</label>
-                        <input type="text" class="form-control"  name = "degree" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <input type="text" class="form-control" value = "{{student.degree}}" name = "degree" onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
 
@@ -263,15 +132,8 @@
                         </select>
                       </div>
                     </div>
-
-
-                    <!-- <div class="mb-3">
-                      <label for="formFile" class="form-label">Default file input example</label>
-                      
-                    </div> -->
-                    
                     <div class="input-group input-group-outline mb-3">
-                      <textarea class="form-control col-lg-12 col-md-6"  name = "comment" placeholder="Leave a comment here"
+                      <textarea class="form-control col-lg-12 col-md-6"  value = "{{student.comment}}"name = "comment"
                       id="floatingTextarea"></textarea>
                     </div>
                     
@@ -284,6 +146,7 @@
                     </div>
 
                     <div class="text-center">
+                        <input type="hidden" class="form-control" value = "{{student.id}}" name = "id" onfocus="focused(this)" onfocusout="defocused(this)">
                       <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-2 mb-0"
                         data-bs-dismiss="modal">Submit</button>
                     </div>
@@ -291,53 +154,12 @@
                 </form>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
           </div>
         </div>
       </div>
-
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.placiddigital.com" class="font-weight-bold" target="_blank">Placid Digital</a>
-                for a better web.
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </footer>
     </div>
   </main>
   <!-- Modal -->
-  <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
   <!--   Core JS Files   -->
   <script src="{% static 'js/core/popper.min.js' %}"></script>
   <script src="{% static 'js/core/bootstrap.min.js' %}"></script>

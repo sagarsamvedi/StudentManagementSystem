@@ -156,3 +156,38 @@ def searchCourse(request):
 def viewProfile(request,pk):
     student = Student.objects.get(id = pk)
     return render(request,'profile.html',{"student":student})
+
+def updateStudent(request,pk):
+    student = Student.objects.get(id = pk)
+    courses = Course.objects.all()
+    return render(request,'updateStudent.html',{"student":student,"courses":courses})
+
+def updateStudentDetail(request):
+    if request.method == "POST":
+
+        std_id = request.POST.get("id")
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        college = request.POST.get("college")
+        degree = request.POST.get("degree")
+        course_id = request.POST.get("course")
+        comment = request.POST.get("comment")
+        profile_pic = request.FILES.get("profilepic")
+
+        stud = Course.objects.get(id=course_id)
+
+        # Update the student object
+        Student.objects.filter(id = std_id).update( name=name,
+            email=email,
+            course=stud,
+            phone=phone,
+            college=college,
+            degree=degree,
+            comment=comment,
+            profile_pic=profile_pic.url,)
+        return redirect(f'/viewProfile/{std_id}')
+
+def deleteStudent(request,pk):
+    Student.objects.get(id = pk).delete()
+    return redirect('/viewstudents/')

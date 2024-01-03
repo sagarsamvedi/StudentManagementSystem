@@ -20,5 +20,8 @@ urlpatterns = [
     path('updateCourseDetail/',updateCourseDetail),
     path('searchCourse/',searchCourse),
     path('viewProfile/<int:pk>/',viewProfile, name = "viewProfile"),
+    path('updatestudent/<int:pk>',updateStudent,name = "updatestudent"),
+    path('deletestudent/<int:pk>/',deleteStudent, name = 'deletestudent'),
+    path('updateStudentDetail/',updateStudentDetail, name = 'updateStudentDetail'),
 
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
