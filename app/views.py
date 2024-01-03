@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . models import *
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib import messages
+from django.db.models import Q
 # Create your views here.
 
 def courses(request):
@@ -59,8 +60,6 @@ def login(request):
         else:
             return HttpResponse("Email not exist")
 
-
-
 def isStrongPassword(password):
     special_chars = "!@#$%&"
     if len(password) < 8:
@@ -75,7 +74,6 @@ def isStrongPassword(password):
         return False
     # If all checks pass, the password is considered strong
     return True
-
 
 def addCourse(request):
     if request.method == 'POST':
@@ -124,5 +122,37 @@ def createStudent(request):
         messages.success(request, "Student created successfully.")
         return redirect('/viewstudents/')
 
+def updateCourse(request,pk):
+    course = Course.objects.get(id = pk)
+    return render(request,'updatecourse.html',{"course":course})
 
-    
+def deleteCourse(request,pk):
+    Course.objects.get(id = pk).delete()
+    return redirect('/courses/')
+
+def updateCourseDetail(request):
+    if request.method == "POST":
+        course_name = request.POST.get("course")
+        fees = request.POST.get("fees")
+        duration = request.POST.get("duration")
+        desc = request.POST.get("desc")
+        course_id = request.POST.get("id")
+
+        Course.objects.filter(id = course_id).update(
+            course_name = course_name,fees = fees,duration = duration,desc= desc
+        )
+        return redirect('/courses/')
+
+def searchCourse(request):
+    if "q" in request.GET:
+        q = request.GET["q"]
+        multiple_q = Q(Q(course_name__icontains = q) | Q(fees__icontains = q) | Q(duration__icontains = q))
+        course = Course.objects.filter(multiple_q)
+    else:
+        course = Course.objects.all()
+    return render(request,'courses.html',{"courses":course})
+
+
+def viewProfile(request,pk):
+    student = Student.objects.get(id = pk)
+    return render(request,'profile.html',{"student":student})

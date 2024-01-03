@@ -7,9 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
   <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
-  <title>
-    Satkar Courses
-  </title>
+  <title>Student LMS</title>
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 <!-- Nucleo Icons -->
@@ -47,23 +45,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="tenants.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Tenants</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="employees.html">
+          <a class="nav-link text-white active bg-gradient-primary " href="../viewstudents">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">Employees</span>
+            <span class="nav-link-text ms-1">Students</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/courses.html">
+          <a class="nav-link text-white " href="../courses">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_in_ar</i>
             </div>
@@ -81,22 +71,6 @@
               <i class="material-icons opacity-10">person</i>
             </div>
             <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/sign-up.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
           </a>
         </li>
       </ul>
@@ -193,6 +167,8 @@
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Duration</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Profile</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -206,6 +182,18 @@
                       <td class="text-center text-sm">{{student.course.course_name}}</td>
                       <td class="text-center text-sm">{{student.course.fees}}</td>
                       <td class="text-center text-sm">{{student.course.duration}}</td>
+                      <td class="text-center text-sm">
+                        <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <a
+                              href="/viewProfile/{{student.id}}"
+                              type="button"
+                              class="btn btn-outline-primary btn-sm mb-0"
+                              >View</a
+                            >
+                          </div>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
