@@ -137,7 +137,6 @@ def createStudent(request):
         messages.success(request, "Student created successfully.")
         return redirect('/viewstudents/')
 
-
 def updateCourse(request, pk):
     course = Course.objects.get(id=pk)
     return render(request, 'updatecourse.html', {"course": course})
@@ -263,7 +262,7 @@ def createTeacher(request):
             phone=phone,
             experience=experience,
             assigned_course=assignedCourse,
-            password=password,
+            password=make_password(password),
             profile_pic=profilepic,
             date_of_joining=date_of_joining
         )
