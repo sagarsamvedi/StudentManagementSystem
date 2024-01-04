@@ -23,5 +23,9 @@ urlpatterns = [
     path('updatestudent/<int:pk>',updateStudent,name = "updatestudent"),
     path('deletestudent/<int:pk>/',deleteStudent, name = 'deletestudent'),
     path('updateStudentDetail/',updateStudentDetail, name = 'updateStudentDetail'),
+    path('searchStudent/',searchStudent),
+    path('viewteachers/',viewTeachers),
+    path('createteacher/',createTeacher),
+
 
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

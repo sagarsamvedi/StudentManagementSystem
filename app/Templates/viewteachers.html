@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
   <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
-  <title>Student LMS</title>
+  <title>teacher LMS</title>
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 <!-- Nucleo Icons -->
@@ -45,11 +45,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary " href="../viewstudents">
+          <a class="nav-link text-white active bg-gradient-primary " href="../viewteachers">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">Students</span>
+            <span class="nav-link-text ms-1">teachers</span>
           </a>
         </li>
         <li class="nav-item">
@@ -129,7 +129,7 @@
               </div>
               <div class="text-end pt-1">
                 <a class="btn bg-gradient-dark mb-0" href="javascript:;" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add Students</a>
+                  data-bs-target="#exampleModal"><i class="material-icons text-sm">add</i>Add Teachers</a>
               </div>
             </div>
 
@@ -138,8 +138,8 @@
 
       </div>
       <div class="search-container">
-        <form action="/searchStudent/">
-          <input type="search" placeholder="Search.." name="studentQuery">
+        <form action="/searchTeacher/">
+          <input type="search" placeholder="Search.." name="teacherQuery">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
@@ -149,27 +149,13 @@
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Total Students</h6>
+                  <h6>Total Teachers</h6>
                 </div>
 
               </div>
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
-                {% if messages %} {% for message in messages %}
-                <div
-                  class="alert alert-{{message.tags}} alert-dismissible fade show"
-                  role="alert"
-                >
-                  <strong>Message: </strong> {{message}}
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                {% endfor %} {% endif %}
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
@@ -177,37 +163,26 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mobile
                         No.</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        College</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Degree
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigned Course
                       </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Of Joining
                       </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fees
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Duration</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Profile</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for student in students %}
+                    {% for teacher in teachers %}
                     <tr>
-                      <td class="align-middle text-sm">{{student.name}}</td>
-                      <td class="align-middle text-sm">{{student.email}}</td>
-                      <td class="align-middle text-center text-sm">{{student.phone}}</td>
-                      <td class="text-center text-sm">{{student.college}}</td>
-                      <td class="text-center text-sm">{{student.degree}}</td>
-                      <td class="text-center text-sm">{{student.course.course_name}}</td>
-                      <td class="text-center text-sm">{{student.course.fees}}</td>
-                      <td class="text-center text-sm">{{student.course.duration}}</td>
+                      <td class="align-middle text-sm">{{teacher.name}}</td>
+                      <td class="align-middle text-sm">{{teacher.email}}</td>
+                      <td class="align-middle text-center text-sm">{{teacher.phone}}</td>
+                      <td class="text-center text-sm">{{teacher.assigned_course.course_name}}</td>
+                      <td class="text-center text-sm">{{teacher.date_of_joining}}</td>
                       <td class="text-center text-sm">
                         <div
                             class="d-flex flex-column justify-content-center"
                           >
                             <a
-                              href="/viewProfile/{{student.id}}"
+                              href="/viewProfile/{{teacher.id}}"
                               type="button"
                               class="btn btn-outline-primary btn-sm mb-0"
                               >View</a
@@ -231,12 +206,12 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Add New Teacher</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="card-body">
-                <form role="form" action='/createstudent/' method= 'POST' enctype="multipart/form-data">
+                <form role="form" action='../createteacher/' method= 'POST' enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -257,38 +232,38 @@
                         <input type="text" class="form-control"   name = "phone" onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
-
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
-                        <label class="form-label">College</label>
-                        <input type="text" class="form-control"   name = "college" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <label class="form-label">Experience</label>
+                        <input type="text" class="form-control"   name = "experience" onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
-                        <label class="form-label">Degree</label>
-                        <input type="text" class="form-control"  name = "degree" onfocus="focused(this)" onfocusout="defocused(this)">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control"   name = "password" onfocus="focused(this)" onfocusout="defocused(this)">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="form-label">Date Of Joining</label>
+                        <input type="date" class="form-control"  name = "date">
                       </div>
                     </div>
 
 
                     <div class="col-lg-6 col-md-6">
                       <div class="input-group input-group-outline mb-3">
-                        <select class="form-select form-control" placeholder="courses" onfocus="focused(this)"
+                        <select class="form-select form-control" placeholder="Courses" onfocus="focused(this)"
                           onfocusout="defocused(this)" name = "course" aria-label="Default select example">
-                          {% for course in courses%}
+                          {% for course in courses %}
                           <option id= "{{course.id}}" value = "{{course.id}}" >{{course.course_name}}</option>
                           {% endfor%} 
                         </select>
                       </div>
                     </div>
-
-
-                    <!-- <div class="mb-3">
-                      <label for="formFile" class="form-label">Default file input example</label>
-                      
-                    </div> -->
                     
                     <div class="input-group input-group-outline mb-3">
                       <textarea class="form-control col-lg-12 col-md-6"  name = "comment" placeholder="Leave a comment here"
