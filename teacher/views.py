@@ -18,6 +18,7 @@ def teacherLogin(request):
         if Teacher.objects.filter(phone=mobile).exists():
             obj = Teacher.objects.get(phone=mobile)
             db_password = obj.password
+            request.session["phone"] = obj.phone
             if check_password(password, db_password):
                 return redirect("teacher:dashboard_user")
             else:
@@ -29,15 +30,23 @@ def teacherLogin(request):
 
 def dashboard_user(request):
     # students = Student.objects.filter(course_name = )
-    return render(request, 'teacherapp/dashboard.html')
+    teacher_phone = request.session.get("phone")
+
+    if teacher_phone:
+        teacher = Teacher.objects.get(phone = teacher_phone)
+        students = Student.objects.filter(course = teacher.assigned_course)
+        return render(request, 'teacherapp/dashboard.html', {"teacher": teacher,"students":students})
+    else:
+        return HttpResponse('Teacher not logged in')
 
 
-# def assignment(request):
-#     assignments = Assignment.objects.all()
-#     courses = Course.objects.all()
-#     students = Student.objects.all()
-#     status_choices = get_status_choices()
-#     return render(request, 'teacherapp/assignment.html', {"assignments": assignments, "students": students, "courses": courses, "status_choices": status_choices})
+
+def assignment(request):
+    assignments = Assignment.objects.all()
+    courses = Course.objects.all()
+    students = Student.objects.all()
+    status_choices = get_status_choices()
+    return render(request, 'teacherapp/assignment.html', {"assignments": assignments, "students": students, "courses": courses, "status_choices": status_choices})
 
 
 def get_status_choices():
@@ -45,22 +54,15 @@ def get_status_choices():
 
 
 def createassignment(request):
-    assign = Assignment.objects.all()
-    courses = Course.objects.all()
-    students = Student.objects.all()
-    status_choices = get_status_choices()
-
-
     if request.method == 'POST':
         assignment_name = request.POST.get('assignment_name')
         status = request.POST.get('status')
         marks = request.POST.get('marks')
-        assign_students_ids = request.POST.get('assign_students')
+        assign_students_ids = request.POST.getlist('assign_students')
         assignment_course_id = request.POST.get('assignment_course')
         assignment_desc = request.POST.get('assignment_desc')
         assignment_file = request.FILES.get('assignment_file')
-        print(assignment_course_id)
-
+        print(assign_students_ids)
         # Step 1: Get the related objects
         assignment_course = Course.objects.get(id=assignment_course_id)
         assign_students = Student.objects.filter(id__in=assign_students_ids)
@@ -82,6 +84,7 @@ def createassignment(request):
 
 
         # Save the changes
-        # assignment.save()
+        assignment.save()
+
         print(assignment)
-    return render(request, 'teacherapp/assignment.html', {"assignments": assign, "students": students, "courses": courses, "status_choices": status_choices})
+        return redirect("../assignment")

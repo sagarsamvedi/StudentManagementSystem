@@ -9,6 +9,6 @@ urlpatterns = [
     path('',loginus),
     path('teacherlogin/',teacherLogin, name = 'teacher_login'),
     path('dashboardus/', dashboard_user, name='dashboard_user'),
-    # path('assignment/', assignment, name='assignment'),
-    path('assignment/', createassignment, name='assignment'),
+    path('assignment/', assignment, name='assignment'),
+    path('createassignment/', createassignment, name='createassignment'),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

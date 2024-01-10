@@ -319,7 +319,7 @@
                 <div class="card-body">
                   <form
                     role="form"
-                    action="/assignment/"
+                    action="../createassignment/"
                     method="POST"
                     enctype="multipart/form-data"
                   >
@@ -393,8 +393,8 @@
                             multiple
                           >
                             {% for student in students %}
-                              <option id="{{ student.id }}" value="{{ student.id }}">
-                                {{ student.name }}
+                              <option id="{{student.id}}" value="{{student.id}}">
+                                {{student.name}}
                               </option>
                             {% endfor %}
                           </select>
