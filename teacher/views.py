@@ -32,12 +32,12 @@ def dashboard_user(request):
     return render(request, 'teacherapp/dashboard.html')
 
 
-def assignment(request):
-    assignments = Assignment.objects.all()
-    courses = Course.objects.all()
-    students = Student.objects.all()
-    status_choices = get_status_choices()
-    return render(request, 'teacherapp/assignment.html', {"assignments": assignments, "students": students, "courses": courses, "status_choices": status_choices})
+# def assignment(request):
+#     assignments = Assignment.objects.all()
+#     courses = Course.objects.all()
+#     students = Student.objects.all()
+#     status_choices = get_status_choices()
+#     return render(request, 'teacherapp/assignment.html', {"assignments": assignments, "students": students, "courses": courses, "status_choices": status_choices})
 
 
 def get_status_choices():
@@ -45,6 +45,12 @@ def get_status_choices():
 
 
 def createassignment(request):
+    assign = Assignment.objects.all()
+    courses = Course.objects.all()
+    students = Student.objects.all()
+    status_choices = get_status_choices()
+
+
     if request.method == 'POST':
         assignment_name = request.POST.get('assignment_name')
         status = request.POST.get('status')
@@ -53,10 +59,13 @@ def createassignment(request):
         assignment_course_id = request.POST.get('assignment_course')
         assignment_desc = request.POST.get('assignment_desc')
         assignment_file = request.FILES.get('assignment_file')
+        print(assignment_course_id)
 
         # Step 1: Get the related objects
         assignment_course = Course.objects.get(id=assignment_course_id)
         assign_students = Student.objects.filter(id__in=assign_students_ids)
+        print(assign_students)
+        
 
         # Step 2: Create the Assignment object
         assignment = Assignment.objects.create(
@@ -71,8 +80,8 @@ def createassignment(request):
         # Add the many-to-many relationship
         assignment.assign_students.set(assign_students)
 
-        # Save the changes
-        assignment.save()
 
-        
-    return redirect("teacher:assignment")
+        # Save the changes
+        # assignment.save()
+        print(assignment)
+    return render(request, 'teacherapp/assignment.html', {"assignments": assign, "students": students, "courses": courses, "status_choices": status_choices})
