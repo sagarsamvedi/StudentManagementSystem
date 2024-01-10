@@ -23,7 +23,6 @@ def teacherLogin(request):
                 return redirect("teacher:dashboard_user")
             else:
                 return HttpResponse('Password Failed')
-
         else:
             return HttpResponse('Mobile Number not Exists')
 
@@ -38,8 +37,6 @@ def dashboard_user(request):
         return render(request, 'teacherapp/dashboard.html', {"teacher": teacher,"students":students})
     else:
         return HttpResponse('Teacher not logged in')
-
-
 
 def assignment(request):
     assignments = Assignment.objects.all()
@@ -88,3 +85,12 @@ def createassignment(request):
 
         print(assignment)
         return redirect("../assignment")
+
+def deleteassignment(request,pk):
+    Assignment.objects.get(id = pk).delete()
+    return redirect("../assignment")
+
+def viewstudent(request,pk):
+    student = Student.objects.get(id = pk)
+    return render(request, 'teacherapp/viewstudent.html', {"student": student})
+

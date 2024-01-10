@@ -11,4 +11,6 @@ urlpatterns = [
     path('dashboardus/', dashboard_user, name='dashboard_user'),
     path('assignment/', assignment, name='assignment'),
     path('createassignment/', createassignment, name='createassignment'),
+    path('deleteassignment/<int:pk>', deleteassignment, name='deleteassignment'),
+    path('viewstudent/<int:pk>', viewstudent, name='viewstudent'),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

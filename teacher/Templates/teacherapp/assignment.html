@@ -217,8 +217,7 @@
                   {% if messages %} {% for message in messages %}
                   <div
                     class="alert alert-{{message.tags}} alert-dismissible fade show"
-                    role="alert"
-                  >
+                    role="alert"                  >
                     <strong>Message: </strong> {{message}}
                     <button
                       type="button"
@@ -256,6 +255,11 @@
                         >
                           Marks
                         </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Delete
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -275,15 +279,18 @@
                           {{student.name }} {% if not forloop.last %}, {% endif  %}
                            {% endfor %}
                         </td>
+                        <td class="align-middle text-center text-sm">
+                          {{assignment.marks}}
+                        </td>
                         <td class="text-center text-sm">
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
                             <a
-                              href="/viewProfile/{{student.id}}"
+                              href="../deleteassignment/{{assignment.id}}"
                               type="button"
                               class="btn btn-outline-primary btn-sm mb-0"
-                              >View</a
+                              >Delete</a
                             >
                           </div>
                         </td>

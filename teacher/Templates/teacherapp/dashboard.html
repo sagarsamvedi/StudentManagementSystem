@@ -240,8 +240,17 @@
                       <td class="align-middle text-sm">
                         <span class="text-xs font-weight-bold"> {{student.course}}</span>
                       </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">{{student.college}}</span>
+                      <td class="text-center text-sm">
+                        <div
+                          class="d-flex flex-column justify-content-center"
+                        >
+                          <a
+                            href="../viewstudent/{{student.id}}"
+                            type="button"
+                            class="btn btn-outline-primary btn-sm mb-0"
+                            >View</a
+                          >
+                        </div>
                       </td>
                     </tr>
                     {% endfor %}
