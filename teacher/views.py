@@ -65,7 +65,7 @@ def createassignment(request):
         assign_students = Student.objects.filter(id__in=assign_students_ids)
         print(assign_students)
         
-
+        teacher = Teacher.objects.get(phone=request.session.get('phone'))
         # Step 2: Create the Assignment object
         assignment = Assignment.objects.create(
             assignment_name=assignment_name,
@@ -73,7 +73,8 @@ def createassignment(request):
             marks=marks,
             assignment_file=assignment_file,
             assignment_course=assignment_course,
-            assignment_desc=assignment_desc
+            assignment_desc=assignment_desc,
+             uploaded_by=teacher,
         )
 
         # Add the many-to-many relationship

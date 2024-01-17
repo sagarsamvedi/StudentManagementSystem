@@ -17,7 +17,8 @@ class Assignment(models.Model):
     assign_students = models.ManyToManyField(Student, blank=True, null=True)
     assignment_course = models.ForeignKey(Course, on_delete=models.CASCADE)
     assignment_desc = models.TextField()
-
+     # New field to associate with the Teacher model
+    uploaded_by = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.assignment_name
 
