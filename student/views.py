@@ -28,7 +28,8 @@ def dashboard(request):
 
     if student_phone:
         student = Student.objects.get(phone = student_phone)
-        return render(request, 'studentapp/dashboard.html',{'student':student})
+        assignments = Assignment.objects.filter(assign_students= student)
+        return render(request, 'studentapp/dashboard.html',{'student':student,'assignments':assignments})
     else:
         return HttpResponse('Student not logged in')
     

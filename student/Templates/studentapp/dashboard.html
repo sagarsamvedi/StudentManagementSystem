@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -224,21 +225,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for student in students %}
+                    {% for assignment in assignments %}
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                            <img src="{% static 'img/small-logos/logo-xd.svg' %}" class="avatar avatar-sm me-3" alt="xd">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{student.name}}</h6>
+                            <h6 class="mb-0 text-sm">{{assignment.assignment_name}}</h6>
 
                           </div>
                         </div>
                       </td>
                       <td class="align-middle text-sm">
-                        <span class="text-xs font-weight-bold"> {{student.course}}</span>
+                        <span class="text-xs font-weight-bold"> {{assignment.status}}</span>
                       </td>
                       <td class="text-center text-sm">
                         <div

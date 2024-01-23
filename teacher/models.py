@@ -19,6 +19,7 @@ class Assignment(models.Model):
     assignment_desc = models.TextField()
      # New field to associate with the Teacher model
     uploaded_by = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    
     def __str__(self):
         return self.assignment_name
 

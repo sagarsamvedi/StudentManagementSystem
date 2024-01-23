@@ -59,7 +59,8 @@ def createassignment(request):
         assignment_course_id = request.POST.get('assignment_course')
         assignment_desc = request.POST.get('assignment_desc')
         assignment_file = request.FILES.get('assignment_file')
-        print(assign_students_ids)
+
+        # print(assign_students_ids)
         # Step 1: Get the related objects
         assignment_course = Course.objects.get(id=assignment_course_id)
         assign_students = Student.objects.filter(id__in=assign_students_ids)
@@ -74,7 +75,7 @@ def createassignment(request):
             assignment_file=assignment_file,
             assignment_course=assignment_course,
             assignment_desc=assignment_desc,
-             uploaded_by=teacher,
+            uploaded_by=teacher,
         )
 
         # Add the many-to-many relationship
